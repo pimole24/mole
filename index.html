@@ -3,18 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>摩爾時報</title>
-    <script src="ruffle.js"></script>
+    <!-- 使用 Ruffle 官方 CDN -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #player-container {
+            margin: 20px auto;
+            width: 800px;
+            height: 600px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         button {
             margin: 5px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <h1>摩爾時報 SWF 播放器</h1>
     <div id="player-container">
-        <!-- 預設顯示第一個 SWF 文件 -->
-        <object id="swf-player" data="1.swf" width="800" height="600"></object>
+        <!-- 使用 Ruffle 對 SWF 進行處理 -->
+        <embed id="swf-player" src="1.swf" width="800" height="600"></embed>
     </div>
     <div>
         <!-- 切換按鈕 -->
@@ -24,9 +51,19 @@
     </div>
 
     <script>
+        // 初始化 Ruffle
+        const ruffle = window.RufflePlayer.newest();
+        const container = document.getElementById('player-container');
+        const player = ruffle.createPlayer();
+        container.innerHTML = ''; // 清空容器
+        container.appendChild(player);
+
+        // 預設加載第一個 SWF
+        player.load('1.swf');
+
+        // 切換 SWF 的功能
         function loadSWF(file) {
-            const player = document.getElementById('swf-player');
-            player.setAttribute('data', file); // 切換 data 屬性為新的 SWF 文件
+            player.load(file); // 使用 Ruffle Player 加載新的 SWF
         }
     </script>
 </body>
