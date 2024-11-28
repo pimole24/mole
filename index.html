@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>摩爾時報</title>
+    <script src="ruffle.js"></script>
+    <style>
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>摩爾時報 SWF 播放器</h1>
+    <div id="player-container">
+        <!-- 預設顯示第一個 SWF 文件 -->
+        <object id="swf-player" data="1.swf" width="800" height="600"></object>
+    </div>
+    <div>
+        <!-- 切換按鈕 -->
+        <button onclick="loadSWF('1.swf')">播放 1.swf</button>
+        <button onclick="loadSWF('2.swf')">播放 2.swf</button>
+        <button onclick="loadSWF('3.swf')">播放 3.swf</button>
+    </div>
+
+    <script>
+        function loadSWF(file) {
+            const player = document.getElementById('swf-player');
+            player.setAttribute('data', file); // 切換 data 屬性為新的 SWF 文件
+        }
+    </script>
+</body>
+</html>
